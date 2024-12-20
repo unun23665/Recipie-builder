@@ -1,5 +1,3 @@
-# Recipie-builder
-list
 import React, { useState, useEffect } from 'react';
 
 interface Ingredient {
@@ -29,8 +27,6 @@ const RecipeForm = () => {
     instructions: '',
     preparationTime: '',
   });
-
-  const [savedRecipes, setSavedRecipes] = useState<Recipe[]>([]);
 
   const units = ['grams', 'cups', 'tablespoons', 'teaspoons'];
 
@@ -103,16 +99,7 @@ const RecipeForm = () => {
     } else {
       localStorage.setItem('recipes', JSON.stringify([recipe]));
     }
-    setSavedRecipes((prevRecipes) => [...prevRecipes, recipe]);
   };
-
-  useEffect(() => {
-    const storedRecipes = localStorage.getItem('recipes');
-    if (storedRecipes) {
-      const parsedRecipes = JSON.parse(storedRecipes);
-      setSavedRecipes(parsedRecipes);
-    }
-  }, []);
 
   const calculateTotalQuantity = (unit: string) => {
     return recipe.ingredients.reduce((acc, ingredient) => {
